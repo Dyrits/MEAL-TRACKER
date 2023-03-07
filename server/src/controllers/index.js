@@ -1,10 +1,25 @@
 import { v4 as uuid } from "uuid";
 
-const create$controller = data => ({
+const create$controller = (data, options) => ({
   get: {
     all: (request, response) => {
       response.json(data);
     }
+  },
+  search: (request, response) => {
+    const { query } = request.query;
+    const keys = options.search.map(key => key.split("."));
+    const results = data.filter(item => {
+      for (const key of keys) {
+        let value = item;
+        for (const part of key) {
+          value = value[part];
+        }
+        if (value && value.toLowerCase().includes(query.toLowerCase())) { return true; }
+      }
+      return false;
+    });
+    return response.json(results);
   },
   create: ({ body }, response) => {
     const data$keys = Object.keys(data[0]).sort();

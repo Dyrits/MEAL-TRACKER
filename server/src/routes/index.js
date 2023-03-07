@@ -4,6 +4,7 @@ const create$router = controller => {
   const router = Router();
 
   router.get("/", controller.get.all);
+  router.get("/search", controller.search);
   router.post("/", controller.create);
   router.put("/:id", controller.update);
   router.delete("/:id", controller.delete);
