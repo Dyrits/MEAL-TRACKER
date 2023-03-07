@@ -1,0 +1,146 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code { font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; }
+
+h1 {
+  border-bottom: 2px solid #DDD;
+  margin: 0;
+  padding: 16px;
+}
+
+h1 > a { color: #FFA31A; }
+
+.subtitle {
+  border-bottom: 2px solid #FFA31A;
+  border-left: 2px solid #FFA31A;
+  border-radius: 0 0 0 4px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+}
+
+button {
+  background-color: #FFA31A;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  padding: 16px;
+}
+
+input, select {
+  border: 2px solid #DDD;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  padding: 16px;
+}
+
+a { text-decoration: none; }
+
+.page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.centered-container {
+  margin: auto;
+  max-width: 750px;
+}
+
+.back-button { margin: 16px; }
+
+.page-container { display: flex; }
+
+.column { flex: 1; }
+
+.list-container {
+  margin: auto;
+  max-width: 600px;
+  padding: 16px;
+}
+
+.list-item {
+  border-bottom: 1px solid #DDD;
+  display: flex;
+  padding: 16px;
+}
+
+.list-item > h3 { flex: 2; }
+
+.list-item > p {
+  align-items: center;
+  display: flex;
+  flex: 6;
+  padding-left: 8px;
+}
+
+.list-item > .right-action {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.small-x {
+  background-color: #CCC;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 24px;
+  padding-top: 1px;
+  position: relative;
+  text-align: center;
+  width: 24px;
+}
+
+.the-x {
+  font-weight: bold;
+  left: 7px;
+  position: absolute;
+  top: 2px;
+}
+
+.search-list-item {
+  border-bottom: 1px solid #DDD;
+  cursor: pointer;
+  padding: 16px;
+}
+
+.search-list-item:hover { background-color: #EEE; }
+
+.full-width {
+  display: block;
+  width: 100%;
+}
+
+.space-before { margin-top: 16px; }
+
+.space-after { margin-bottom: 16px; }
+
+.shopping-list-button { background-color: #ADE25D; }
+
+.left-list-item {
+  border: 1px solid #FFA31A77;
+  border-left: none;
+
+  border-radius: 0px 4px 4px 0px;
+  padding: 8px 8px 8px 0px;
+}
