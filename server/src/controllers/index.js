@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-const create$controller = data  => ({
+const create$controller = data => ({
   get: {
     all: (request, response) => {
       response.json(data);
@@ -23,9 +23,14 @@ const create$controller = data  => ({
     const item = data.find(item => item.id === params.id);
     for (const key in body) {
       if (item.hasOwnProperty(key)) {
-         item[key] = key === "date" ? new Date(body[key]) : body[key];
+        item[key] = key === "date" ? new Date(body[key]) : body[key];
       }
     }
+    return response.json(data);
+  },
+  delete: ({ params }, response) => {
+    const index = data.findIndex(item => item.id === params.id);
+    data.splice(index, 1);
     return response.json(data);
   }
 });
