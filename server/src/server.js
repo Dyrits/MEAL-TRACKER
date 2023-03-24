@@ -1,9 +1,11 @@
 import express from "express";
 import { config } from "dotenv";
 
+import { connect } from "./data/database.js";
+
 // Environment variables~
 config();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 
 // Express app~
 const app = express();
@@ -11,12 +13,15 @@ const app = express();
 // JSON body parser~
 app.use(express.json());
 
+// Database~
+await connect();
+
 // Routes~
 const routes = {
   recipes: await import("./routes/recipes.js").then((module) => module.default),
   ingredients: await import("./routes/ingredients.js").then((module) => module.default),
   meals: await import("./routes/meals.js").then((module) => module.default),
-  "shopping-list": await import("./routes/shopping-list.js").then((module) => module.default),
+  "shopping-list": await import("./routes/shopping-list.js").then((module) => module.default)
 };
 
 // API~

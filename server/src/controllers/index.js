@@ -1,9 +1,14 @@
 import { v4 as uuid } from "uuid";
 
-const create$controller = (data, options) => ({
+import { collection } from "../data/database.js";
+
+// @TODO: Remove the data parameter and only use the name parameter with the collection function.
+const create$controller = (data, name, options) => ({
   get: {
-    all: (request, response) => {
-      response.json(data);
+    all: async (request, response) => {
+      // @TODO: Replace $data with data once the data parameter is removed.
+      const $data = await collection(name).find({}).toArray();
+      return response.json($data);
     }
   },
   search: (request, response) => {

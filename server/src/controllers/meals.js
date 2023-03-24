@@ -1,15 +1,18 @@
 import { v4 as uuid } from "uuid";
 
+import { collection } from "../data/database.js";
+// @TODO: Replace the meals and recipes data by retrieving them from the database.
 import meals from "../data/meals.js";
 import recipes from "../data/recipes.js";
 import { hydrate } from "../services/meals.js";
 import create$controller from "./index.js";
 
 const controller = {
-  ...create$controller(meals),
+  ...create$controller(meals, "meals"),
   get: {
-    all: (request, response) => {
-      response.json(hydrate(meals));
+    all: async (request, response) => {
+      const $meals = await collection("meals").find({}).toArray();
+      response.json(await hydrate($meals));
     }
   },
   create: ({ body }, response) => {
