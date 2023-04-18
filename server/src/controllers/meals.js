@@ -1,5 +1,3 @@
-import { v4 as uuid } from "uuid";
-
 import { collection } from "../data/database.js";
 // @TODO: Replace the meals and recipes data by retrieving them from the database.
 import meals from "../data/meals.js";
@@ -15,11 +13,12 @@ const controller = {
       response.json(await hydrate($meals));
     }
   },
-  create: ({ body }, response) => {
-    if (~recipes.findIndex(recipe => recipe.id === body.recipe)) {
-      const meal = { id: uuid(), date: new Date(meal.date), ...body };
-      meals.push(meal);
-      response.json(hydrate(meals));
+  create: async ({ body }, response) => {
+    const $recipes = await collection("recipes").find({}).toArray();
+    if (~$recipes.findIndex(recipe => recipe._id.toString() === body.recipe)) {
+      await collection("meals").insertOne({ date: new Date(body.date), ...body });
+      const $meals = await collection("meals").find({}).toArray();
+      response.json(await hydrate($meals, $recipes));
     } else {
       response.status(400).json({ error: "The request body contains invalid data." });
     }

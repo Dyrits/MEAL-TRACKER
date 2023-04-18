@@ -1,5 +1,3 @@
-import { v4 as uuid } from "uuid";
-
 import { collection } from "../data/database.js";
 
 // @TODO: Remove the data parameter and only use the name parameter with the collection function.
@@ -20,24 +18,24 @@ const create$controller = (data, name, options) => ({
         for (const part of key) {
           value = value[part];
         }
-        if (value && value.toLowerCase().includes(query.toLowerCase())) { return true; }
+        if (value && value.toLowerCase().includes(query.toLowerCase())) {
+          return true;
+        }
       }
       return false;
     });
     return response.json(results);
   },
-  create: ({ body }, response) => {
-    const data$keys = Object.keys(data[0]).sort();
-    // If the data has an id, then we need to generate a new id for the new item~
-    body = { id: uuid(), ...body };
-    const body$keys = Object.keys(body).sort();
-    // If the item has the same keys as the data, then we can add it to the data~
-    if (JSON.stringify(body$keys) === JSON.stringify(data$keys)) {
-      data.push(body);
-      return response.json(data);
+  create: async ({ body }, response) => {
+    try {
+      await collection(name).insertOne(body);
+      // @TODO: Replace $data with data once the data parameter is removed.
+      const $data = await collection(name).find({}).toArray();
+      return response.json($data);
+    } catch (error) {
+      console.error(error);
+      return response.status(400).json({ error: "The request body contains invalid data." });
     }
-    // Otherwise, we need to return an error~
-    return response.status(400).json({ error: "The request body contains invalid data." });
   },
   update: ({ body, params }, response) => {
     const item = data.find(item => item.id === params.id);
