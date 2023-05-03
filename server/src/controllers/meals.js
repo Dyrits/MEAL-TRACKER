@@ -1,12 +1,11 @@
+import { ObjectId } from "mongodb";
+
 import { collection } from "../data/database.js";
-// @TODO: Replace the meals and recipes data by retrieving them from the database.
-import meals from "../data/meals.js";
-import recipes from "../data/recipes.js";
 import { hydrate } from "../services/meals.js";
 import create$controller from "./index.js";
 
 const controller = {
-  ...create$controller(meals, "meals"),
+  ...create$controller("meals"),
   get: {
     all: async (request, response) => {
       const $meals = await collection("meals").find({}).toArray();
@@ -22,6 +21,18 @@ const controller = {
     } else {
       response.status(400).json({ error: "The request body contains invalid data." });
     }
+  },
+  update: async ({ body, params }, response) => {
+    const _id = new ObjectId(params.id);
+    const meal = await collection("meals").findOne({ _id });
+    for (const key in body) {
+      if (meal.hasOwnProperty(key)) {
+        meal[key] = key === "date" ? new Date(body[key]) : body[key];
+      }
+    }
+    await collection("meals").updateOne({ _id }, { $set: meal });
+    const $meals = await collection("meals").find({}).toArray();
+    response.json(await hydrate($meals));
   }
 };
 
