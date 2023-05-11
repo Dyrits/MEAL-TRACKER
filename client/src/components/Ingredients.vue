@@ -4,6 +4,7 @@
     <div class="list-item" v-for="ingredient in ingredients" :key="ingredient.name">
       <h4 class="left-list-item">{{ ingredient.name }}</h4>
       <p>{{ ingredient.amount }} {{ ingredient.units }}</p>
+      <button @click="removeIngredient(ingredient._id)">Delete</button>
     </div>
     <div class="right-action">
       <RouterLink to="/add-ingredient">
@@ -16,6 +17,11 @@
 <script>
 export default {
   name: "Ingredients",
-  props: ["ingredients"]
+  props: ["ingredients"],
+  methods: {
+    removeIngredient(id) {
+      this.$emit("removeIngredient", id);
+    }
+  }
 };
 </script>

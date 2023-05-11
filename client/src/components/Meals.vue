@@ -28,7 +28,7 @@ export default {
       return this.meals[date]?.name;
     },
     removeMeal(date) {
-      this.$emit('remove-meal', date);
+      this.$emit('removeMeal', date);
     }
   }
 };

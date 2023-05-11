@@ -4,6 +4,7 @@
       :ingredients="ingredients"
       :meals="meals"
       @addIngredient="addIngredient"
+      @removeIngredient="removeIngredient"
       @addMeal="addMeal"
       @removeMeal="removeMeal"
   />
@@ -30,8 +31,8 @@ export default {
     });
     api.get("/meals").then(({ data }) => {
       data.map(meal => {
-        const { id, recipe, date } = meal;
-        this.meals[new Date(date)] = { id, recipe };
+        const { _id, recipe, date } = meal;
+        this.meals[new Date(date)] = { _id, recipe };
       })
     });
   },
@@ -41,17 +42,22 @@ export default {
         this.ingredients = data;
       });
     },
+    removeIngredient(id) {
+      api.delete(`/ingredients/${id}`).then(({ data }) => {
+        this.ingredients = data;
+      });
+    },
     addMeal({ date, recipe }) {
       api.post("/meals", { date, recipe }).then(({ data }) => {
         data.map(meal => {
-          const { id, recipe, date } = meal;
-          this.meals[new Date(date)] = { id, recipe };
+          const { _id, recipe, date } = meal;
+          this.meals[new Date(date)] = { _id, recipe };
         })
       });
     },
     removeMeal(date) {
-      const { id } = this.meals[date];
-      api.delete(`/meals/${id}`).then(() => {
+      const { _id } = this.meals[date];
+      api.delete(`/meals/${_id}`).then(() => {
         delete this.meals[date];
       });
     }
