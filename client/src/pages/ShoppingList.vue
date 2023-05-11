@@ -10,12 +10,23 @@
 </template>
 
 <script>
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/api"
+});
+
 export default {
   name: "ShoppingList",
   data() {
     return {
-      items: ["3 cups of flour", "5 tablespoons of sugar", "1 cup of milk"]
+      items: []
     };
+  },
+  created() {
+    api.get("/shopping-list").then(({ data }) => {
+      this.items = data;
+    });
   }
 };
 </script>

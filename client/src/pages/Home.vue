@@ -6,7 +6,9 @@
     <div class="column">
       <Ingredients :ingredients="ingredients"/>
       <RouterLink to="/shopping-list">
-        <button class="shopping-list-button list-container full-width">Generate the shopping list</button>
+        <div class="list-container">
+          <button class="shopping-list-button full-width">Generate the shopping list</button>
+        </div>
       </RouterLink>
     </div>
   </div>
@@ -23,8 +25,8 @@ export default {
     Meals, Ingredients
   },
   methods: {
-    removeMeal(meal) {
-      this.$emit("removeMeal", meal);
+    removeMeal(date) {
+      this.$emit("removeMeal", date);
     }
   }
 };

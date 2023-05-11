@@ -1,5 +1,6 @@
-import express from "express";
 import { config } from "dotenv";
+import express from "express";
+import cors from "cors";
 
 import { connect } from "./data/database.js";
 
@@ -9,6 +10,9 @@ const port = process.env.PORT;
 
 // Express app~
 const app = express();
+
+// CORS~
+app.use(cors());
 
 // JSON body parser~
 app.use(express.json());

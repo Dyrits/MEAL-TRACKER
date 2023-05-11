@@ -135,7 +135,9 @@ a { text-decoration: none; }
 
 .space-after { margin-bottom: 16px; }
 
-.shopping-list-button { background-color: #ADE25D; }
+.shopping-list-button {
+  background-color: #ADE25D;
+}
 
 .left-list-item {
   border: 1px solid #FFA31A77;

@@ -3,7 +3,6 @@
   <RouterView
       :ingredients="ingredients"
       :meals="meals"
-      :recipes="recipes"
       @addIngredient="addIngredient"
       @addMeal="addMeal"
       @removeMeal="removeMeal"
@@ -11,33 +10,50 @@
 </template>
 
 <script>
-import recipes from "./recipes";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/api"
+});
 
 export default {
   name: "App",
   data() {
     return {
-      recipes,
       meals: {},
-      ingredients: [
-        {name: "Chicken Breast Halves", amount: 4, units: "units"},
-        {name: "Salt", amount: 0.25, units: "teaspoons"},
-        {name: "Black Pepper", amount: 0.125, units: "teaspoons"},
-        {name: "Swiss Cheese Slices", amount: 6, units: "units"},
-        {name: "Ham", amount: 4, units: "units"},
-        {name: "Bread Crumbs", amount: 0.5, units: "cups"}
-      ],
+      ingredients: [],
     };
+  },
+  created() {
+    api.get("/ingredients").then(({ data }) => {
+      this.ingredients = data;
+    });
+    api.get("/meals").then(({ data }) => {
+      data.map(meal => {
+        const { id, recipe, date } = meal;
+        this.meals[new Date(date)] = { id, recipe };
+      })
+    });
   },
   methods: {
     addIngredient(ingredient) {
-      this.ingredients.push(ingredient);
+      api.post("/ingredients", ingredient).then(({ data }) => {
+        this.ingredients = data;
+      });
     },
     addMeal({ date, recipe }) {
-      this.meals[date] = recipe;
+      api.post("/meals", { date, recipe }).then(({ data }) => {
+        data.map(meal => {
+          const { id, recipe, date } = meal;
+          this.meals[new Date(date)] = { id, recipe };
+        })
+      });
     },
     removeMeal(date) {
-      delete this.meals[date];
+      const { id } = this.meals[date];
+      api.delete(`/meals/${id}`).then(() => {
+        delete this.meals[date];
+      });
     }
   }
 };

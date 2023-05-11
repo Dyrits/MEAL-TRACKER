@@ -5,7 +5,7 @@
       <h4 class="left-list-item">{{ day.getDate() }}</h4>
       <p>{{ getMeal(day) || "No meal is planned for this day." }}</p>
       <div class="right-action">
-        <RouterLink v-if="!getMeal(day)" :to="{path: '/search-recipe', query: { date: stringify(day) }}">
+        <RouterLink v-if="!getMeal(day)" :to="{path: '/search-recipe', query: { date: day }}">
           <button>Add</button>
         </RouterLink>
         <button v-if="getMeal(day)" @click.prevent="removeMeal(day);">Remove</button>
@@ -24,14 +24,11 @@ export default {
     };
   },
   methods: {
-    stringify(date) {
-      return date.toISOString().split('T')[0];
-    },
     getMeal(date) {
-      return this.meals[this.stringify(date)]?.name;
+      return this.meals[date]?.name;
     },
     removeMeal(date) {
-      this.$emit('remove-meal', this.stringify(date));
+      this.$emit('remove-meal', date);
     }
   }
 };

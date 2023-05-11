@@ -24,9 +24,14 @@
 </template>
 
 <script>
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/api"
+});
+
 export default {
   name: "RecipeSearch",
-  props: ["recipes"],
   data() {
     return {
       keyword: String(),
@@ -36,9 +41,10 @@ export default {
   },
   methods: {
     search() {
-      this.searched = true;
-      this.results = this.recipes.filter(recipe => recipe.name.toLowerCase().includes(this.keyword.toLowerCase()));
-
+      api.get(`/recipes/search?query=${this.keyword}`).then(({ data }) => {
+        this.searched = true;
+        this.results = data;
+      });
     },
     addAsMeal(recipe) {
       const { date } = this.$route.query;
