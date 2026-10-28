@@ -1,1 +1,43 @@
-IyBNZWFsIFRyYWNrZXIKCkEgZnVsbC1zdGFjayBtZWFsIHRyYWNraW5nIGFwcGxpY2F0aW9uOiBhIFZ1ZSAzIGNsaWVudCBhbmQgYSBOb2RlLmpzIC8gRXhwcmVzcyBBUEkgYmFja2VkIGJ5IE1vbmdvREIuCgojIyBBYm91dCBUaGUgUHJvamVjdAoKVGhlIHJlcG9zaXRvcnkgaXMgc3BsaXQgaW50byB0d28gcGFydHM6CgotIGBjbGllbnQvYDogYSBWdWUgMyBzaW5nbGUtcGFnZSBhcHBsaWNhdGlvbiAoVnVlIFJvdXRlciwgQXhpb3MpLCBzY2FmZm9sZGVkIHdpdGggVnVlIENMSS4KLSBgc2VydmVyL2A6IGFuIEV4cHJlc3MgUkVTVCBBUEkgKGVudHJ5IHBvaW50IGBzcmMvc2VydmVyLmpzYCkgc3RvcmluZyBkYXRhIGluIE1vbmdvREIsIHdpdGggcm91dGVzIGFuZCBjb250cm9sbGVycyBmb3IgbWVhbHMsIHJlY2lwZXMsIGluZ3JlZGllbnRzIGFuZCBhIHNob3BwaW5nIGxpc3QuIEEgYGRvY2tlci1jb21wb3NlLnltbGAgaXMgcHJvdmlkZWQgdG8gcnVuIGEgbG9jYWwgTW9uZ29EQiBjb250YWluZXIuCgojIyBCdWlsdCBXaXRoCgotIFZ1ZSAzIC8gVnVlIFJvdXRlciAvIEF4aW9zCi0gTm9kZS5qcyAvIEV4cHJlc3MKLSBNb25nb0RCICh2aWEgRG9ja2VyKQoKIyMgR2V0dGluZyBTdGFydGVkCgojIyMgUHJlcmVxdWlzaXRlcwoKLSBOb2RlLmpzCi0gRG9ja2VyIChvcHRpb25hbCwgZm9yIHRoZSBkYXRhYmFzZSkKCiMjIyBTZXJ2ZXIKCi0gRnJvbSB0aGUgYHNlcnZlci9gIGRpcmVjdG9yeSwgaW5zdGFsbCB0aGUgZGVwZW5kZW5jaWVzIHdpdGggYG5wbSBpbnN0YWxsYC4KLSBUaGUgZW52aXJvbm1lbnQgaXMgcmVhZCBmcm9tIGBzZXJ2ZXIvLmVudmA7IHRoZSBjb21taXR0ZWQgdmFsdWVzIHBvaW50IHRvIGEgbG9jYWwgTW9uZ29EQiBpbnN0YW5jZSAoYFBPUlQ9ODAwMGAsIGBNT05HT19VUkw9bW9uZ29kYjovL2xvY2FsaG9zdDoyNzAxN2ApLgotIFN0YXJ0IE1vbmdvREIgd2l0aCBgZG9ja2VyIGNvbXBvc2UgdXBgIGZyb20gdGhlIGBzZXJ2ZXIvYCBkaXJlY3RvcnkgKG9yIHVzZSB5b3VyIG93biBpbnN0YW5jZSkuCi0gU3RhcnQgdGhlIEFQSSB3aXRoIGBub2RlIHNyYy9zZXJ2ZXIuanNgLgoKIyMjIENsaWVudAoKLSBGcm9tIHRoZSBgY2xpZW50L2AgZGlyZWN0b3J5LCBpbnN0YWxsIHRoZSBkZXBlbmRlbmNpZXMgd2l0aCBgbnBtIGluc3RhbGxgLgotIFN0YXJ0IHRoZSBkZXZlbG9wbWVudCBzZXJ2ZXIgd2l0aCBgbnBtIHJ1biBzZXJ2ZWAsIG9yIGJ1aWxkIGZvciBwcm9kdWN0aW9uIHdpdGggYG5wbSBydW4gYnVpbGRgLgoKIyMgTGljZW5zZQoKTm8gbGljZW5zZSBmaWxlIGlzIHByZXNlbnQgaW4gdGhpcyByZXBvc2l0b3J5LgoKIyMgQ29udGFjdAoKRHlsYW4gSi4gR2Vycml0cyAtIFtHaXRIdWJdKGh0dHBzOi8vZ2l0aHViLmNvbS9EeXJpdHMpCg==
+# Meal Tracker
+
+A full-stack meal tracking application: a Vue 3 client and a Node.js / Express API backed by MongoDB.
+
+## About The Project
+
+The repository is split into two parts:
+
+- `client/`: a Vue 3 single-page application (Vue Router, Axios), scaffolded with Vue CLI.
+- `server/`: an Express REST API (entry point `src/server.js`) storing data in MongoDB, with routes and controllers for meals, recipes, ingredients and a shopping list. A `docker-compose.yml` is provided to run a local MongoDB container.
+
+## Built With
+
+- Vue 3 / Vue Router / Axios
+- Node.js / Express
+- MongoDB (via Docker)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- Docker (optional, for the database)
+
+### Server
+
+- From the `server/` directory, install the dependencies with `npm install`.
+- The environment is read from `server/.env`; the committed values point to a local MongoDB instance (`PORT=8000`, `MONGO_URL=mongodb://localhost:27017`).
+- Start MongoDB with `docker compose up` from the `server/` directory (or use your own instance).
+- Start the API with `node src/server.js`.
+
+### Client
+
+- From the `client/` directory, install the dependencies with `npm install`.
+- Start the development server with `npm run serve`, or build for production with `npm run build`.
+
+## License
+
+No license file is present in this repository.
+
+## Contact
+
+Dylan J. Gerrits - [GitHub](https://github.com/Dyrits)
